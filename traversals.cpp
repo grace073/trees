@@ -56,6 +56,33 @@ void inOrder(Node *root) {
     inOrder(root->right);
 }
 
+void levelOrder(Node* root){
+    //insertion:
+    queue<Node*>q;
+    q.push(root);
+    q.push(NULL);//marker to indicate the completion of that level
+    //traversal:
+    while(!q.empty()){
+       Node*front=q.front();
+        q.pop();
+        if(front==NULL){
+            cout<<endl;//level completed
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+        else{
+            cout<<front->data<<" ";
+            if(front->left!=NULL){
+                q.push(front->left);
+            }
+            if(front->right!=NULL){
+                q.push(front->right);
+            } 
+        }
+    } 
+}
+
 void createTree(Node *root) {
     int data;
     
@@ -95,5 +122,9 @@ int main() {
     inOrder(root);
     cout << endl;
 
+    cout << "LevelOrder Traversal:"<<endl;
+    levelOrder(root);
+    cout << endl;
+    
     return 0;
 }
